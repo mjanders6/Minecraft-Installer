@@ -7,6 +7,7 @@ Light bash script to create a Java Edition Minecraft Server
 - openjdk-21(or latest version)
 - mcrcon repository: `https://github.com/Tiiffi/mcrcon.git`
 - Optional: UFW Firewall to set firewall rules
+- Ensuer `sed` is installed
 
 
 
