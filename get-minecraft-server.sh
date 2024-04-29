@@ -4,17 +4,21 @@
 
 #Might need to change this link based on the latest version
 # https://www.minecraft.net/en-us/download/server
+echo "Getting the Minecraft file: "
 wget https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar -P ~/server
+echo ""
 
+echo "Changing directories and running Minecraft. This will error out since it may be its first run."
 cd ~/server
 java -Xmx1024M -Xms1024M -jar server.jar nogui
+echo ""
 
 # File variables. The following is what they should be set to. 
 eula_value=true
 rcon_port=25575
 rcon_enabled=true
 
-# Cange the eula.txt file 
+# Set the eula.txt file 
 echo "Going to update the eula.txt file now. Change false to true:"
 echo ""
 sed -i ''s/eula=.*/eula=$eula_value/'' ~/server/eula.txt
@@ -33,6 +37,7 @@ sed -i ''s/rcon.port=.*/rcon.port=$rcon_port/'' ~/server/server.properties
 echo 'Enter the password you are going to use for rcon:'
 read -s rcon_passwd
 sed -i ''s/rcon.password=.*/rcon.password=$rcon_passwd/'' ~/server/server.properties
+echo ""
 
 # Set enable-rcon=true
 echo "Enabling rcon: "
@@ -40,5 +45,5 @@ echo ""
 sed -i ''s/enable-rcon=.*/enable-rcon=$rcon_enabled/'' ~/server/server.properties
 
 echo ""
-echo "Complete"
+echo "Updating the eula dn server.properties files complete."
 echo ""
