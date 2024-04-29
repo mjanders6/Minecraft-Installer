@@ -11,7 +11,7 @@ Light bash script to create a Java Edition Minecraft Server
 
 
 # Running the Shell Code
-1. First enabel the .sh files to be executable: `chmod +X File-Name`
+1. First enabel the .sh files to be executable: `chmod +x File-Name`
 2. Run the scripts with `./File-Name`
 3. Edit the eula.txt file: `eula=true`
 4. Update the `server.properties`
@@ -21,4 +21,9 @@ Light bash script to create a Java Edition Minecraft Server
 5. Add the minecraft.service file to the directory: /etc/systemd/system
 6. Reload the daemon: sudo systemctl daemon-reload
 7. Start the service: 
- - 
+	- `sudo systemctl start minecraft`
+8. Enable service to start after rebooting:
+	- `sudo systemctl enable minecraft`
+9. Create backup script
+10. Accessing the console
+	- `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t`
