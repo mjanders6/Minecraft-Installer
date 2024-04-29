@@ -3,6 +3,12 @@
 # Make files executable
 sudo chmod +x minecraft.sh get-minecraft-server.sh mcrcon-script.sh
 
+# install applications. Might need to revise the versions
+echo "Running updates and upgrades: "
+sudo apt update -y
+sudo apt upgrade -y
+echo ""
+
 # Install necessary applications and add minecraft user and directory
 source minecraft.sh
 
