@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Make all files executable
+# Make files executable
 sudo chmod +x minecraft.sh get-minecraft-server.sh mcrcon-script.sh
-
 
 # Install necessary applications and add minecraft user and directory
 source minecraft.sh
