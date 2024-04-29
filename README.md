@@ -9,7 +9,7 @@ I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxiz
 - openjdk-21(or latest version)
 - mcrcon repository: `https://github.com/Tiiffi/mcrcon.git`
 - Optional: UFW Firewall to set firewall rules
-- Ensuer `sed` is installed
+- Ensure `sed` is installed
 
 
 
