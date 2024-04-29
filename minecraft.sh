@@ -13,13 +13,7 @@ sudo useradd -r -m -U -d /opt/minecraft -s /bin/bash minecraft
 sudo su - minecraft
 mkdir -p ~/{backups,tools,server}
 
-
-# Setup mcrcon
-git clone https://github.com/Tiiffi/mcrcon.git ~/tools/mcrcon
-cd ~/tools/mcrcon
-gcc -std=gnull -pedantic -Wall -Wextra -02 -s -o mcrcon mcrcon.c
-
-# Install MInecraft Server
+# Install Minecraft Server
 
 #Might need to change this link based on the latest version
 # https://www.minecraft.net/en-us/download/server
