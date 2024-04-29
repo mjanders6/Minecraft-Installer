@@ -45,5 +45,5 @@ echo ""
 sed -i ''s/enable-rcon=.*/enable-rcon=$rcon_enabled/'' ~/server/server.properties
 
 echo ""
-echo "Updating the eula dn server.properties files complete."
+echo "Updating the eula in server.properties files complete."
 echo ""

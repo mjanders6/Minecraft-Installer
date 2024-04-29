@@ -1,9 +1,9 @@
 # Minecraft-Installer
 Light bash script to create a Java Edition Minecraft Server 
 
-I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxize.com/post/how-to-make-minecraft-server-on-ubuntu-20-04/#configuring-backups) to make a solid Minecraft server. This also works for Ubuntu 22.04. 
+I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxize.com/post/how-to-make-minecraft-server-on-ubuntu-20-04/#configuring-backups) to make a solid Minecraft server. This also works for Ubuntu 22.04. I am essentially breaking up this instructions into executable bash scripts to automate the process. I will then test it out in an Ubuntu 22.04 VM to ensure it works properly. 
 
-# Install dependancies
+# Install Dependencies
 - git
 - build-essentials
 - openjdk-21(or latest version)
