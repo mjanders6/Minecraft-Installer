@@ -22,7 +22,7 @@ export rcon_passwd
 sudo cp minecraft.service /etc/systemd/system/minecraft.service
 
 # Add password to the minecraft.service
-sed -i ''s/strong-password/$rcon_passwd/'' /etc/systemd/system/minecraft.service
+sudo sed -i ''s/strong-password/$rcon_passwd/'' /etc/systemd/system/minecraft.service
 
 # Install necessary applications and add minecraft user and directory
 source minecraft.sh
