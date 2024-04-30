@@ -13,6 +13,11 @@ echo ""
 sudo apt install -y git build-essential openjdk-21-jre-headless
 echo ""
 
+# Set rcon.password=SET-STRONG-PASSWORD
+echo 'Enter the password you are going to use for rcon:'
+read -s rcon_passwd
+export rcon_passwd
+
 # Add minecraft.service file
 sudo cp minecraft.service /etc/systemd/system/minecraft.service
 
@@ -21,6 +26,9 @@ source minecraft.sh
 
 # Get the minecraft server and start it
 source get-minecraft-server.sh
+
+# Add password to the minecraft.service
+sed -i ''s/strong-password/$rcon_passwd/'' /etc/systemd/system/minecraft.service
 
 # Setup mcrcon
 source mcrcon-script.sh
