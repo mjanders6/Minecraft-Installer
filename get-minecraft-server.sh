@@ -16,6 +16,9 @@ rcon_enabled=true
 echo 'Enter the password you are going to use for rcon:'
 read -s rcon_passwd
 
+# Add password to the minecraft.service
+sed -i ''s/strong-password/$rcon_passwd/'' ./minecraft.service
+
 sudo -u minecraft bash << EOF
 echo ""
 mkdir -p ~/{backups,tools,server}
