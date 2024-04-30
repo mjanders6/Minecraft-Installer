@@ -10,8 +10,7 @@ sudo apt upgrade -y
 echo ""
 
 # Open JDK 21 is one behind the most current version
-applications = ["git", "build-essentials", "openjdk-21-jre-headless"]
-sudo apt install -y "${applications[@]}"
+sudo apt install -y git build-essentials openjdk-21-jre-headless
 echo ""
 
 # Install necessary applications and add minecraft user and directory
