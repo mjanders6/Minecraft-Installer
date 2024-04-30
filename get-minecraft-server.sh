@@ -55,6 +55,9 @@ sed -i ''s/rcon.port=.*/rcon.port=$rcon_port/'' ~/server/server.properties
 sed -i ''s/rcon.password=.*/rcon.password=$rcon_passwd/'' ~/server/server.properties
 echo ""
 
+# Add password to the minecraft.service
+sed -i ''s/strong-password/$rcon_passwd/'' /etc/systemd/system/minecraft.service
+
 # Set enable-rcon=true
 echo "Enabling rcon: "
 echo ""
@@ -64,6 +67,3 @@ echo ""
 echo "Updating the eula in server.properties files complete."
 echo ""
 EOF
-
-# Add password to the minecraft.service
-sed -i ''s/strong-password/$rcon_passwd/'' ./minecraft.service

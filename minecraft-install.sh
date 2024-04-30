@@ -13,6 +13,9 @@ echo ""
 sudo apt install -y git build-essential openjdk-21-jre-headless
 echo ""
 
+# Add minecraft.service file
+sudo cp minecraft.service /etc/systemd/system/minecraft.service
+
 # Install necessary applications and add minecraft user and directory
 source minecraft.sh
 
@@ -21,9 +24,6 @@ source get-minecraft-server.sh
 
 # Setup mcrcon
 source mcrcon-script.sh
-
-# Add minecraft.service file
-sudo cp minecraft.service /etc/systemd/system/minecraft.service
 
 # Restarting the daemon
 sudo systemctl daemon-reload
