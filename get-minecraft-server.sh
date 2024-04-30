@@ -12,6 +12,10 @@ eula_value=true
 rcon_port=25575
 rcon_enabled=true
 
+# Set rcon.password=SET-STRONG-PASSWORD
+echo 'Enter the password you are going to use for rcon:'
+read -s rcon_passwd
+
 sudo -u minecraft bash << EOF
 echo ""
 mkdir -p ~/{backups,tools,server}
@@ -48,9 +52,6 @@ echo "Setting rcon port:"
 echo ""
 sed -i ''s/rcon.port=.*/rcon.port=$rcon_port/'' ~/server/server.properties
 
-# Set rcon.password=SET-STRONG-PASSWORD
-echo 'Enter the password you are going to use for rcon:'
-read -s rcon_passwd
 sed -i ''s/rcon.password=.*/rcon.password=$rcon_passwd/'' ~/server/server.properties
 echo ""
 
