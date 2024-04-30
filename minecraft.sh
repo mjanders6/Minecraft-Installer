@@ -10,3 +10,6 @@ echo "Setting up directories: "
 sudo su - minecraft
 mkdir -p ~/{backups,tools,server}
 echo ""
+
+# Get the minecraft server and start it
+source get-minecraft-server.sh
