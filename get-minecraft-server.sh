@@ -3,7 +3,7 @@
 # Install Minecraft Server
 # Setup directories
 echo "Setting up directories: "
-sudo su - minecraft
+sudo -u minecraft bash << EOF
 echo ""
 mkdir -p ~/{backups,tools,server}
 echo ""
@@ -53,3 +53,5 @@ sed -i ''s/enable-rcon=.*/enable-rcon=$rcon_enabled/'' ~/server/server.propertie
 echo ""
 echo "Updating the eula in server.properties files complete."
 echo ""
+
+EOF
