@@ -1,6 +1,12 @@
 #!/bin/bash
 
 # Install Minecraft Server
+# Setup directories
+echo "Setting up directories: "
+sudo su - minecraft
+echo ""
+mkdir -p ~/{backups,tools,server}
+echo ""
 
 #Might need to change this link based on the latest version
 # https://www.minecraft.net/en-us/download/server
