@@ -3,6 +3,12 @@
 # Install Minecraft Server
 # Setup directories
 echo "Setting up directories: "
+
+# File variables. The following is what they should be set to. 
+eula_value=true
+rcon_port=25575
+rcon_enabled=true
+
 sudo -u minecraft bash << EOF
 echo ""
 mkdir -p ~/{backups,tools,server}
