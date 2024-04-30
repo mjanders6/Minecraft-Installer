@@ -21,14 +21,14 @@ export rcon_passwd
 # Add minecraft.service file
 sudo cp minecraft.service /etc/systemd/system/minecraft.service
 
+# Add password to the minecraft.service
+sed -i ''s/strong-password/$rcon_passwd/'' /etc/systemd/system/minecraft.service
+
 # Install necessary applications and add minecraft user and directory
 source minecraft.sh
 
 # Get the minecraft server and start it
 source get-minecraft-server.sh
-
-# Add password to the minecraft.service
-sed -i ''s/strong-password/$rcon_passwd/'' /etc/systemd/system/minecraft.service
 
 # Setup mcrcon
 source mcrcon-script.sh
