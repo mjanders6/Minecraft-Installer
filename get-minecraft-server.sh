@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Need to be able to pause so that a password can be entered
+
+
 # Install Minecraft Server
 # Setup directories
 echo "Setting up directories: "
@@ -59,5 +62,4 @@ sed -i ''s/enable-rcon=.*/enable-rcon=$rcon_enabled/'' ~/server/server.propertie
 echo ""
 echo "Updating the eula in server.properties files complete."
 echo ""
-
 EOF
