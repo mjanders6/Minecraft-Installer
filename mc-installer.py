@@ -17,12 +17,13 @@ GIT = 'git'
 BUILD_Essential = 'build-essential'
 OPENJDK = 'openjdk-21-jre-headless'
 
-EULA_VALUE = true
-RCON_PORT = 25575
-RCON_ENABLE = true
+RCON_PORT = '25575'
+RCON_ENABLE = 'true'
 
 # minecraft path
 MC_PATH = '/opt/minecraft'
+EULA_PATH = f'{MC_PATH}/server/eula.txt'
+SERVER_PROPS_PATH = f'{MC_PATH}/server/server.properties'
 
 # Paths for service file
 src_pth = r"./minecraft.service"
@@ -67,14 +68,36 @@ alter_file(dest_path, "strong-password", password)
 os.makedirs(os.path.expanduser('/opt/minecraft/{backups,tools,server}'), exist_ok=True)
 
 # Download Minecraft server file
-print("Getting the Minecraft file:")
-subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'{MC_PATH}/server'])
-
+print("Downloading the Minecraft file: ")
+mc_download = subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'{MC_PATH}/server'])
+mc_download.wait()
 
 # Change directories and run Minecraft
 print("Changing directories and running Minecraft. This will error out since it may be its first run.")
 os.chdir(f'{MC_PATH}/server')
-subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
+server_start = subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
+server_start.wait()
+
+
+# Update the eula.txt file
+print("Going to update the eula.txt file now. Change false to true:")
+with open(f'{EULA_PATH}', "r+") as f:
+    content = f.read()
+    content = content.replace("eula=false", "eula=true")
+    f.seek(0)
+    f.write(content)
+    f.truncate()
+
+# Update the server.properties file
+print("Going to update the server.properties file:")
+with open(f'{SERVER_PROPS_PATH}', "r+") as f:
+    content = f.read()
+    content = content.replace("rcon.port=", "rcon.port=" + RCON_PORT)
+    content = content.replace("enable-rcon=", "enable-rcon=" + RCON_ENABLE)
+    f.seek(0)
+    f.write(content)
+    f.truncate()
+
 
 # choice = inquirer.list_input("Public or private?",
                               # choices=['public', 'private'])
