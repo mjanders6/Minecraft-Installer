@@ -85,7 +85,7 @@ print("Updateing the EULA file. ")
 eula_update.wait()
 print("")
 
-# Run the eula.txt file 
+# Update the server.properties file for the rcon port 
 rcon_port = subprocess.Popen(f'sed -i ''s/rcon.port=.*/rcon.port={RCON_PORT}/'' {SERVER_PROPS_PATH}', shell=True, stdin=None)
 print("Updating the rcon-port in server.properties file. ")
 rcon_port.wait()
