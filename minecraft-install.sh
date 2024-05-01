@@ -40,7 +40,7 @@ sudo systemctl enable minecraft
 
 echo ""
 echo "Do you want to reboot the server? y/n"
-read -s ans_reboot
+read ans_reboot
 
 if [''$ans_reboot'' -eq 'y']; then
     echo "Going to reboot now"
