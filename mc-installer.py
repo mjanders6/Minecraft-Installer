@@ -1,23 +1,55 @@
+# 
+# 
+# Trouble shooting notes:
+# - need to run as sudo 
+# - need to install python3-pip
+# - need to install inquirer as sudo
+# 
 import inquirer
 from inquirer.themes import GreenPassion
 import subprocess
+import os
+import shutil
+
+# Global variables
+GIT = git
+BUILD_Essential = build-essential 
+OPENJDK = openjdk-21-jre-headless
+
+# Run the commands with no output 
+#proc = subprocess.Popen(f'sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
+proc = subprocess.Popen('sudo apt update && sudo apt upgrade', shell=True, stdin=None)
+proc.wait()
 
 
-# q = [
-#     inquirer.Text("name", message="Whats your name?", default="No one"),
-#     inquirer.List("jon", message="Does Jon Snow know?", choices=["yes", "no"], default="no"),
-#     inquirer.Checkbox(
-#         "kill_list", message="Who you want to kill?", choices=["Cersei", "Littlefinger", "The Mountain"]
-#     ),
-# ]
+# Install dependancies
+install_dependancies = subprocess.Popen(f'sudo apt install {GIT} {BUILD_Essential} {OPENJDK}', shell=True, stdin=None)
+install_dependancies.wait()
 
-# inquirer.prompt(q, theme=GreenPassion())
+# Get password
+password = inquirer.password(message='Please enter your password for mcron')
 
+def alter_file(file_path, old_word, new_word):
+    # Read the content of the file
+    with open(file_path, 'r') as file:
+        file_content = file.read()
 
-text = inquirer.text(message="Enter your username")
-print(text)
+    # Replace the old word with the new word
+    modified_content = file_content.replace(old_word, new_word)
 
-password = inquirer.password(message='Please enter your password')
+    # Write the modified content back to the file
+    with open(file_path, 'w') as file:
+        file.write(modified_content)
+
+# Example usage
+alter_file("minecraft.service", "strong-password", password)
+
+# Copy minecraft.service to the /etc/systemd/system location
+src_pth = r"./minecraft.service"
+dest_path=r"/etc/systemd/system/minecraft.service"
+
+shutil.copyfile(src_pth, dest_path)
+
 
 
 choice = inquirer.list_input("Public or private?",
