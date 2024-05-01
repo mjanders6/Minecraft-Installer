@@ -13,9 +13,10 @@ import os
 import shutil
 
 # Global variables
-GIT = git
-BUILD_Essential = build-essential 
-OPENJDK = openjdk-21-jre-headless
+GIT = 'git'
+BUILD_Essential = 'build-essential'
+OPENJDK = 'openjdk-21-jre-headless'
+
 # Paths for service file
 src_pth = r"./minecraft.service"
 dest_path=r"/etc/systemd/system/minecraft.service"
