@@ -79,24 +79,18 @@ server_start = subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server
 server_start.wait()
 
 
-# Update the eula.txt file
-print("Going to update the eula.txt file now. Change false to true:")
-with open(f'{EULA_PATH}', "r+") as f:
-    content = f.read()
-    content = content.replace("eula=false", "eula=true")
-    f.seek(0)
-    f.write(content)
-    f.truncate()
+# Run the eula.txt file 
+eula_update = subprocess.Popen(f'sed -i ''s/eula=.*/eula=true/'' {EULA_PATH}', shell=True, stdin=None)
+print("Updateing the EULA file. ")
+eula_update.wait()
+print("")
 
-# Update the server.properties file
-print("Going to update the server.properties file:")
-with open(f'{SERVER_PROPS_PATH}', "r+") as f:
-    content = f.read()
-    content = content.replace("rcon.port=", "rcon.port=" + RCON_PORT)
-    content = content.replace("enable-rcon=", "enable-rcon=" + RCON_ENABLE)
-    f.seek(0)
-    f.write(content)
-    f.truncate()
+# Run the eula.txt file 
+rcon_port = subprocess.Popen(f'sed -i ''s/rcon.port=.*/rcon.port={RCON_PORT}/'' {SERVER_PROPS_PATH}', shell=True, stdin=None)
+print("Updating the rcon-port in server.properties file. ")
+rcon_port.wait()
+print("")
+
 
 
 # choice = inquirer.list_input("Public or private?",
