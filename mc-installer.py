@@ -16,6 +16,7 @@ import shutil
 GIT = 'git'
 BUILD_Essential = 'build-essential'
 OPENJDK = 'openjdk-21-jre-headless'
+SET_USERNAME = 'minecraft'
 
 RCON_PORT = '25575'
 RCON_ENABLE = 'true'
@@ -43,7 +44,13 @@ def alter_file(file_path, old_word, new_word):
     with open(file_path, 'w') as file:
         file.write(modified_content)
 
-
+def switch_user(username):
+    try:
+        # Execute the command 'sudo su - username' using subprocess
+        subprocess.run(['sudo', 'su', '-', username], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e}")
+        
 # Run the update/upgrade commands with no output 
 proc = subprocess.Popen(f'sudo apt update && sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
 print("Running updates and insstalling necessary packages.")
@@ -73,44 +80,4 @@ os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 
 # Download Minecraft server file
 print("Downloading the Minecraft file: ")
-mc_download = subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'{MC_PATH}/server'])
-
-# Change directories and run Minecraft
-print("Changing directories and running Minecraft. This will error out since it may be its first run.")
-os.chdir(f'{MC_PATH}/server')
-server_start = subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
-
-# Run the eula.txt file 
-eula_update = subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None)
-print("Updateing the EULA file. ")
-print("")
-
-# Update the server.properties file for the rcon port 
-rcon_port = subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None)
-print("Updating the rcon-port in server.properties file. ")
-print("")
-
-# Update the server.properties file for the rcon password
-rcon_password = subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={password}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None)
-print("Updating the rcon.password in server.properties file. ")
-print("")
-
-# Setup mcrcon
-# Clone mcrcon from github
-mcrcon_clone = subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'{MC_PATH}/tools/mcrcon'])
-os.chdir(f'{MC_PATH}/tools/mcrcon')
-gcc_mcrcon = subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"])
-
-
-system_daemon = subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
-start_minecraft = subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None)
-enable_minecraft = subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None)
-
-# chown /opt/minecraft to minecraft user 
-
-# choice = inquirer.list_input("Public or private?",
-                              # choices=['public', 'private'])
-# correct = inquirer.confirm("This will delete all your current labels and "
-                        # "create a new ones. Continue?", default=False)
-						
-						
+switch_user(SET_USERNAME)
