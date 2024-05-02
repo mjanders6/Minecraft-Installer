@@ -53,7 +53,7 @@ def switch_user(username):
 
 def run_commands_as_user(username, commands):
     # Execute commands as the new user
-    subprocess.run(['sudo', '-u', username, *commands], check=True)
+    subprocess.run(['sudo', '-u', username, *commands], check=False)
         
 # Run the update/upgrade commands with no output 
 proc = subprocess.Popen(f'sudo apt update && sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
