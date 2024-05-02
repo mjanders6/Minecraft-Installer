@@ -4,6 +4,7 @@
 # - need to run as sudo 
 # - need to install python3-pip
 # - need to install inquirer as sudo
+# if you just want to call the shell scripts 
 # 
 import inquirer
 from inquirer.themes import GreenPassion
@@ -114,9 +115,9 @@ first_commands = [
 run_commands_as_user(USERNAME, first_commands)
 
 print("Starting Minecraft: ")
-system_daemon = subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
-start_minecraft = subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None)
-enable_minecraft = subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None)
+subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
+subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None)
+subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None)
 
 # chown /opt/minecraft to minecraft user 
 
