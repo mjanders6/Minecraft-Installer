@@ -88,36 +88,17 @@ os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 first_commands = [
     subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'~/server']),
     os.chdir(f'~/server'),
-    subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
-    
-]
-
-run_commands_as_user(SET_USERNAME, first_commands)
-
-
-# Run the eula.txt file 
-eula_update = subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' ~/server/eula.txt', shell=True, stdin=None)
-print("Updateing the EULA file. ")
-print("")
-
-# Update the server.properties file for the rcon port 
-rcon_port = subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' ~/server/server.properties', shell=True, stdin=None)
-print("Updating the rcon-port in server.properties file. ")
-print("")
-
-# Update the server.properties file for the rcon password
-rcon_password = subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={password}/'' ~/server/server.properties', shell=True, stdin=None)
-print("Updating the rcon.password in server.properties file. ")
-print("")
-
-second_commands = [
+    subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]),
+    subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' ~/server/eula.txt', shell=True, stdin=None),
+    subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' ~/server/server.properties', shell=True, stdin=None),
+    subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={password}/'' ~/server/server.properties', shell=True, stdin=None),
     subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'~/tools/mcrcon']),
     os.chdir(f'~/tools/mcrcon'),
     subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
     exit
 ]
 
-run_commands_as_user(SET_USERNAME, second_commands)
+run_commands_as_user(SET_USERNAME, first_commands)
 
 
 system_daemon = subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
