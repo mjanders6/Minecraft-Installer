@@ -16,7 +16,7 @@ import shutil
 GIT = 'git'
 BUILD_Essential = 'build-essential'
 OPENJDK = 'openjdk-21-jre-headless'
-SET_USERNAME = 'minecraft'
+USERNAME = 'minecraft'
 
 RCON_PORT = '25575'
 RCON_ENABLE = 'true'
@@ -81,7 +81,7 @@ create_user = subprocess.run(["sudo", "useradd", "-r", "-m", "-U", "-d", "/opt/m
 os.makedirs(os.path.expanduser('/opt/minecraft/backups'), exist_ok=True)
 os.makedirs(os.path.expanduser('/opt/minecraft/server'), exist_ok=True)
 os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
-subprocess.run(['sudo', 'chown', '-R', f'{SET_USERNAME}:{SET_USERNAME}', MC_PATH], check=True)
+subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True)
 
 first_commands = [
     subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'/opt/minecraft/server']),
@@ -94,12 +94,13 @@ first_commands = [
     subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'/opt/minecraft/tools/mcrcon']),
     os.chdir(f'/opt/minecraft/tools/mcrcon'),
     subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
+    subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True)
     exit
 ]
 
-run_commands_as_user(SET_USERNAME, first_commands)
+run_commands_as_user(USERNAME, first_commands)
 
-
+print("Starting Minecraft: ")
 system_daemon = subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
 start_minecraft = subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None)
 enable_minecraft = subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None)
