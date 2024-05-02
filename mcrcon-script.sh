@@ -6,7 +6,7 @@ sudo -u minecraft bash << EOF
 git clone https://github.com/Tiiffi/mcrcon.git ~/tools/mcrcon
 
 cd ~/tools/mcrcon
-gcc -std=gnull -pedantic -Wall -Wextra -02 -s -o mcrcon mcrcon.c
+gcc -std=gnu11 -pedantic -Wall -Wextra -O2 -s -o mcrcon mcrcon.c
 
 echo ""
 echo "mcrcon setup complete. "
