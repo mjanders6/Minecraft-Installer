@@ -73,7 +73,7 @@ os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 
 # Download Minecraft server file
 print("Downloading the Minecraft file: ")
-mc_download = subprocess.run(["sudo", "-u", "minecraft", "wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'{MC_PATH}/server'])
+mc_download = subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'{MC_PATH}/server'])
 
 # Change directories and run Minecraft
 print("Changing directories and running Minecraft. This will error out since it may be its first run.")
@@ -97,9 +97,9 @@ print("")
 
 # Setup mcrcon
 # Clone mcrcon from github
-mcrcon_clone = subprocess.run(["sudo", "-u", "minecraft", "git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'{MC_PATH}/tools/mcrcon'])
+mcrcon_clone = subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'{MC_PATH}/tools/mcrcon'])
 os.chdir(f'{MC_PATH}/tools/mcrcon')
-gcc_mcrcon = subprocess.run(["sudo", "-u", "minecraft", "gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"])
+gcc_mcrcon = subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"])
 
 
 system_daemon = subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
