@@ -78,7 +78,7 @@ mc_download = subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects
 # Change directories and run Minecraft
 print("Changing directories and running Minecraft. This will error out since it may be its first run.")
 os.chdir(f'{MC_PATH}/server')
-server_start = subprocess.run(["sudo", "-u", "minecraft", "java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
+server_start = subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
 
 # Run the eula.txt file 
 eula_update = subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None)
@@ -106,6 +106,7 @@ system_daemon = subprocess.Popen('sudo systemctl daemon-reload', shell=True, std
 start_minecraft = subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None)
 enable_minecraft = subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None)
 
+# chown /opt/minecraft to minecraft user 
 
 # choice = inquirer.list_input("Public or private?",
                               # choices=['public', 'private'])
