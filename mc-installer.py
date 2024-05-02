@@ -52,8 +52,11 @@ def switch_user(username):
         print(f"Error: {e}")
 
 def run_commands_as_user(username, commands):
-    # Execute commands as the new user
-    subprocess.run(['sudo', '-u', username, *commands], check=False)
+    try:
+        # Execute commands as the new user
+        subprocess.run(['sudo', '-u', username, *commands], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e}")
         
 # Run the update/upgrade commands with no output 
 proc = subprocess.Popen(f'sudo apt update && sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
@@ -84,6 +87,7 @@ os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True)
 
 first_commands = [
+    "echo 'Downloading Minecraft server from the Minecraft website: '",
     subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'/opt/minecraft/server']),
     os.chdir(f'/opt/minecraft/server'),
     subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]),
@@ -94,7 +98,7 @@ first_commands = [
     subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'/opt/minecraft/tools/mcrcon']),
     os.chdir(f'/opt/minecraft/tools/mcrcon'),
     subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
-    subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True)
+    subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True),
     exit
 ]
 
