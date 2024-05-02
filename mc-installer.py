@@ -50,6 +50,13 @@ def switch_user(username):
         subprocess.run(['sudo', 'su', '-', username], check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
+
+def run_commands_as_user(username, commands):
+    try:
+        # Execute commands as the new user
+        subprocess.run(['sudo', '-u', username, *commands], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e}")
         
 # Run the update/upgrade commands with no output 
 proc = subprocess.Popen(f'sudo apt update && sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
@@ -78,15 +85,15 @@ os.makedirs(os.path.expanduser('/opt/minecraft/backups'), exist_ok=True)
 os.makedirs(os.path.expanduser('/opt/minecraft/server'), exist_ok=True)
 os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 
-# Download Minecraft server file
-print("Downloading the Minecraft file: ")
-switch_user(SET_USERNAME)
-mc_download = subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'~/server'])
+first_commands = [
+    "echo subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'~/server'])",
+    "echo os.chdir(f'~/server')",
+    "echo subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])"
+    
+]
 
-# Change directories and run Minecraft
-print("Changing directories and running Minecraft. This will error out since it may be its first run.")
-os.chdir(f'~/server')
-server_start = subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
+run_commands_as_user(SET_USERNAME, first_commands)
+
 
 # Run the eula.txt file 
 eula_update = subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' ~/server/eula.txt', shell=True, stdin=None)
@@ -103,11 +110,14 @@ rcon_password = subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={pa
 print("Updating the rcon.password in server.properties file. ")
 print("")
 
-# Setup mcrcon
-# Clone mcrcon from github
-mcrcon_clone = subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'~/tools/mcrcon'])
-os.chdir(f'~/tools/mcrcon')
-gcc_mcrcon = subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"])
+second_commands = [
+    "echo subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'~/tools/mcrcon'])",
+    "echo os.chdir(f'~/tools/mcrcon')",
+    "echo subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"])",
+    "echo exit"
+]
+
+run_commands_as_user(SET_USERNAME, second_commands)
 
 
 system_daemon = subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
