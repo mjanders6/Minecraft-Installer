@@ -81,6 +81,7 @@ create_user = subprocess.run(["sudo", "useradd", "-r", "-m", "-U", "-d", "/opt/m
 os.makedirs(os.path.expanduser('/opt/minecraft/backups'), exist_ok=True)
 os.makedirs(os.path.expanduser('/opt/minecraft/server'), exist_ok=True)
 os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
+subprocess.run(['sudo', 'chown', '-R', f'{SET_USERNAME}:{SET_USERNAME}', MC_PATH], check=True)
 
 first_commands = [
     subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'/opt/minecraft/server']),
@@ -88,6 +89,7 @@ first_commands = [
     subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]),
     subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None),
     subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
+    subprocess.Popen('sed -i 'f's/enable-rcon=.*/enable-rcon={RCON_ENABLE}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
     subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={password}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
     subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'/opt/minecraft/tools/mcrcon']),
     os.chdir(f'/opt/minecraft/tools/mcrcon'),
