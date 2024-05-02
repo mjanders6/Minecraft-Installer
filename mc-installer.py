@@ -100,8 +100,9 @@ os.chdir(f'{MC_PATH}/tools/mcrcon')
 gcc_mcrcon = subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"])
 
 
-#cd ~/tools/mcrcon
-#gcc -std=gnull -pedantic -Wall -Wextra -02 -s -o mcrcon mcrcon.c
+system_daemon = subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
+start_minecraft = subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None)
+enable_minecraft = subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None)
 
 
 # choice = inquirer.list_input("Public or private?",
