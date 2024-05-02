@@ -19,6 +19,7 @@ OPENJDK = 'openjdk-21-jre-headless'
 
 RCON_PORT = '25575'
 RCON_ENABLE = 'true'
+EULA = 'true'
 
 # minecraft path
 MC_PATH = '/opt/minecraft'
@@ -77,15 +78,19 @@ os.chdir(f'{MC_PATH}/server')
 server_start = subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
 
 # Run the eula.txt file 
-eula_update = subprocess.Popen(f'sed -i ''s/eula=.*/eula=true/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None)
+eula_update = subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None)
 print("Updateing the EULA file. ")
 print("")
 
 # Update the server.properties file for the rcon port 
-rcon_port = subprocess.Popen(f'sed -i ''s/rcon.port=.*/rcon.port=25575/'' /opt/minecraft/server/server.properties', shell=True, stdin=None)
+rcon_port = subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None)
 print("Updating the rcon-port in server.properties file. ")
 print("")
 
+# Update the server.properties file for the rcon password
+rcon_password = subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={password}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None)
+print("Updating the rcon.password in server.properties file. ")
+print("")
 
 
 # choice = inquirer.list_input("Public or private?",
