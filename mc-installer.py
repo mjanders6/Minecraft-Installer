@@ -120,10 +120,6 @@ first_commands = [
 
 run_commands_as_user(USERNAME, first_commands)
 
-print("Starting Minecraft: ")
-subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
-subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None)
-subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None)
 
 # chown /opt/minecraft to minecraft user 
 
