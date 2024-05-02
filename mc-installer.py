@@ -86,9 +86,9 @@ os.makedirs(os.path.expanduser('/opt/minecraft/server'), exist_ok=True)
 os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 
 first_commands = [
-    "echo subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'~/server'])",
-    "echo os.chdir(f'~/server')",
-    "echo subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])"
+    subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'~/server']),
+    os.chdir(f'~/server'),
+    subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
     
 ]
 
@@ -111,10 +111,10 @@ print("Updating the rcon.password in server.properties file. ")
 print("")
 
 second_commands = [
-    "echo subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'~/tools/mcrcon'])",
-    "echo os.chdir(f'~/tools/mcrcon')",
-    "echo subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"])",
-    "echo exit"
+    subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'~/tools/mcrcon']),
+    os.chdir(f'~/tools/mcrcon'),
+    subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
+    exit
 ]
 
 run_commands_as_user(SET_USERNAME, second_commands)
