@@ -97,7 +97,7 @@ print("")
 # Clone mcrcon from github
 mcrcon_clone = subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'{MC_PATH}/tools/mcrcon'])
 os.chdir(f'{MC_PATH}/tools/mcrcon')
-gcc_mcrcon = subprocess.run(["gcc", "-std=gnull", "-pedantic", "-Wall", "-Wextra", "-02", "-s", "-o", "mcrcon", "mcrcon.c"])
+gcc_mcrcon = subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-02", "-s", "-o", "mcrcon", "mcrcon.c"])
 
 
 #cd ~/tools/mcrcon
