@@ -110,7 +110,7 @@ first_commands = [
     subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
     print('Setting the minecraft directory. \n'),
     subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True),
-    subprocess.run(['exit'])
+    subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None)
 ]
 
 run_commands_as_user(USERNAME, first_commands)
