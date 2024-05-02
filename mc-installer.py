@@ -87,17 +87,25 @@ os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True)
 
 first_commands = [
-    "echo 'Downloading Minecraft server from the Minecraft website: '",
+    print('Downloading Minecraft server from the Minecraft website: \n'),
     subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'/opt/minecraft/server']),
     os.chdir(f'/opt/minecraft/server'),
+    print('Initializing Minecraft. Going to fail since the eula.txt is set to false. \n'),
     subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]),
+    print('Setting the eula.txt to true. \n'),
     subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None),
+    print('Changing the rcon port. \n'),
     subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
+    print(''),
     subprocess.Popen('sed -i 'f's/enable-rcon=.*/enable-rcon={RCON_ENABLE}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
+    print(''),
     subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={password}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
+    print(''),
     subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'/opt/minecraft/tools/mcrcon']),
+    print(''),
     os.chdir(f'/opt/minecraft/tools/mcrcon'),
     subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
+    print(''),
     subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True),
     exit
 ]
