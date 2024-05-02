@@ -110,7 +110,12 @@ first_commands = [
     subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
     print('Setting the minecraft directory. \n'),
     subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH]),
-    subprocess.run(['sudo', 'systemctl', 'daemon-reload'])
+    print('Reloading deamon. \n'),
+    subprocess.run(['sudo', 'systemctl', 'daemon-reload']),
+    print('Starting Minecraft. \n'),
+    subprocess.run(['sudo', 'systemctl', 'start', 'minecraft']),
+    print('Enabling Minecraft to start upon rebooting the server. \n'),
+    subprocess.run(['sudo', 'systemctl', 'enable', 'minecraft']),
 ]
 
 run_commands_as_user(USERNAME, first_commands)
