@@ -52,11 +52,8 @@ def switch_user(username):
         print(f"Error: {e}")
 
 def run_commands_as_user(username, commands):
-    try:
-        # Execute commands as the new user
-        subprocess.run(['sudo', '-u', username, *commands], check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
+    # Execute commands as the new user
+    subprocess.run(['sudo', '-u', username, *commands], check=True)
         
 # Run the update/upgrade commands with no output 
 proc = subprocess.Popen(f'sudo apt update && sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
@@ -86,14 +83,14 @@ os.makedirs(os.path.expanduser('/opt/minecraft/server'), exist_ok=True)
 os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 
 first_commands = [
-    subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'~/server']),
-    os.chdir(f'~/server'),
+    subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'/opt/minecraft/server']),
+    os.chdir(f'/opt/minecraft/server'),
     subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]),
-    subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' ~/server/eula.txt', shell=True, stdin=None),
-    subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' ~/server/server.properties', shell=True, stdin=None),
-    subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={password}/'' ~/server/server.properties', shell=True, stdin=None),
-    subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'~/tools/mcrcon']),
-    os.chdir(f'~/tools/mcrcon'),
+    subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None),
+    subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
+    subprocess.Popen('sed -i 'f's/rcon.password=.*/rcon.password={password}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
+    subprocess.run(["git", "clone", "https://github.com/Tiiffi/mcrcon.git", f'/opt/minecraft/tools/mcrcon']),
+    os.chdir(f'/opt/minecraft/tools/mcrcon'),
     subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
     exit
 ]
