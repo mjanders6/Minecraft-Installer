@@ -70,25 +70,20 @@ os.makedirs(os.path.expanduser('/opt/minecraft/{backups,tools,server}'), exist_o
 # Download Minecraft server file
 print("Downloading the Minecraft file: ")
 mc_download = subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'{MC_PATH}/server'])
-#mc_download.wait()
 
 # Change directories and run Minecraft
 print("Changing directories and running Minecraft. This will error out since it may be its first run.")
 os.chdir(f'{MC_PATH}/server')
 server_start = subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"])
-#server_start.wait()
-
 
 # Run the eula.txt file 
-eula_update = subprocess.Popen(f'sed -i ''s/eula=.*/eula=true/'' {EULA_PATH}', shell=True, stdin=None)
+eula_update = subprocess.Popen(f'sed -i ''s/eula=.*/eula=true/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None)
 print("Updateing the EULA file. ")
-#eula_update.wait()
 print("")
 
 # Update the server.properties file for the rcon port 
-rcon_port = subprocess.Popen(f'sed -i ''s/rcon.port=.*/rcon.port={RCON_PORT}/'' {SERVER_PROPS_PATH}', shell=True, stdin=None)
+rcon_port = subprocess.Popen(f'sed -i ''s/rcon.port=.*/rcon.port=25575/'' /opt/minecraft/server/server.properties', shell=True, stdin=None)
 print("Updating the rcon-port in server.properties file. ")
-#rcon_port.wait()
 print("")
 
 
