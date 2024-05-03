@@ -5,8 +5,8 @@
 # - need to install python3-pip
 # - need to install inquirer as sudo
 # 
-from curses.ascii import US
-from re import sub
+# from curses.ascii import US
+# from re import sub
 import inquirer
 from inquirer.themes import GreenPassion
 import subprocess

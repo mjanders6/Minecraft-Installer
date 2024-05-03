@@ -1,7 +1,9 @@
 # Minecraft-Installer
-Light bash script to create a Java Edition Minecraft Server 
+Light python script to create a Java Edition Minecraft Server 
 
-I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxize.com/post/how-to-make-minecraft-server-on-ubuntu-20-04/#configuring-backups) to make a solid Minecraft server. This also works for Ubuntu 22.04. I am essentially breaking up this instructions into executable bash scripts to automate the process. I will then test it out in an Ubuntu 22.04 VM to ensure it works properly. 
+I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxize.com/post/how-to-make-minecraft-server-on-ubuntu-20-04/#configuring-backups) to make a solid Minecraft server. This also works for Ubuntu 22.04. I am essentially breaking up this instructions into a python script to automate the process. I will then test it out in an Ubuntu 22.04 VM to ensure it works properly. 
+
+I initially crated bash scritps to automate the process. minecraft-install.sh is the script that can also be run to automate the process as well. 
 
 # Install Dependencies
 - git
@@ -10,11 +12,12 @@ I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxiz
 - mcrcon repository: `https://github.com/Tiiffi/mcrcon.git`
 - Optional: UFW Firewall to set firewall rules
 - Ensure `sed` is installed
+- Inquirer and subprocess for the python script
 
 
 
 # Running the Shell Code
-1. Set `minecraft-install.sh` to an executable. It will set necessary files as executable: `chmod +x File-Name`
+1. Set `minecraft-install.sh` to an executable. It will set all necessary files as executable: `chmod +x File-Name`
 2. Run `./minecraft-install.sh`
 3. The `minecraft-install.sh` will perform the following:
 	- Edit the eula.txt file: `eula=true`
@@ -29,3 +32,10 @@ I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxiz
 	- Create script to backup the server file
 4. Accessing the console
 	- `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t`
+
+# Running the python script
+1. Run the script with 
+	- `sudo python3 mc-installer.py`
+2. Enter the password for mcrcon when prompted
+3. When installation is complete, run the following to verify that everything worked:
+	- `sudo systemctl status minecraft`
