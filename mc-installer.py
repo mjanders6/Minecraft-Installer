@@ -97,6 +97,11 @@ first_commands = [
     print('Setting the eula.txt to true. \n'),
     subprocess.Popen('sed -i 'f's/eula=.*/eula={EULA}/'' /opt/minecraft/server/eula.txt', shell=True, stdin=None),
     print('Changing the rcon port. \n'),
+    inquirer.Text(
+        "rcon-port",
+        message="Set the rcon port. Keep default[rcon-port=25575]",
+        default = "25575"
+    ),
     subprocess.Popen('sed -i 'f's/rcon.port=.*/rcon.port={RCON_PORT}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
     print('Enablign rcon. \n'),
     subprocess.Popen('sed -i 'f's/enable-rcon=.*/enable-rcon={RCON_ENABLE}/'' /opt/minecraft/server/server.properties', shell=True, stdin=None),
