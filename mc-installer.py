@@ -61,7 +61,7 @@ def run_commands_as_user(username, commands):
         print(f"Error: {e}")
         
 # Run the update/upgrade commands with no output 
-proc = subprocess.Popen(f'sudo apt update && sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
+proc = subprocess.Popen('sudo apt update && sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
 print("Running updates and insstalling necessary packages.")
 proc.wait()
 print("")
@@ -90,8 +90,9 @@ subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check
 
 first_commands = [
     print('Downloading Minecraft server from the Minecraft website: \n'),
-    subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", f'/opt/minecraft/server']),
-    os.chdir(f'/opt/minecraft/server'),
+    # subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", '/opt/minecraft/server']),
+    subprocess.Popen('wget https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar -P /opt/minecraft/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+    os.chdir('/opt/minecraft/server'),
     print('Initializing Minecraft. Going to fail since the eula.txt is set to false. \n'),
     subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]),
     print('Setting the eula.txt to true. \n'),
