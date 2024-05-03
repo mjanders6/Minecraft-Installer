@@ -6,6 +6,7 @@
 # - need to install inquirer as sudo
 # if you just want to call the shell scripts 
 # 
+from curses.ascii import US
 from re import sub
 import inquirer
 from inquirer.themes import GreenPassion
@@ -93,7 +94,7 @@ first_commands = [
     # subprocess.run(["wget", "https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar", "-P", '/opt/minecraft/server']),
     subprocess.Popen('wget https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar -P /opt/minecraft/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     os.chdir('/opt/minecraft/server'),
-    print('Initializing Minecraft. Going to fail since the eula.txt is set to false. \n'),
+    print('Initializing Minecraft. Going to fail since the eula.txt is set to false. Be patient, this will take some time. Dont stop the process. \n'),
     # subprocess.run(["java", "-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"]),
     subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     print('Setting the eula.txt to true. \n'),
@@ -113,13 +114,17 @@ first_commands = [
     # subprocess.run(["gcc", "-std=gnu11", "-pedantic", "-Wall", "-Wextra", "-O2", "-s", "-o", "mcrcon", "mcrcon.c"]),
     subprocess.Popen('gcc -std=gnu11 -pedantic -Wall -Wextra -O2 -s -o mcrcon mcrcon.c', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     print('Setting the minecraft directory. \n'),
-    subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH]),
+    # subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH]),
+    subprocess.Popen(f'sudo chown -R {USERNAME}:{USERNAME} {MC_PATH}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     print('Reloading deamon. \n'),
-    subprocess.run(['sudo', 'systemctl', 'daemon-reload']),
+    # subprocess.run(['sudo', 'systemctl', 'daemon-reload']),
+    subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     print('Starting Minecraft. \n'),
-    subprocess.run(['sudo', 'systemctl', 'start', 'minecraft']),
+    # subprocess.run(['sudo', 'systemctl', 'start', 'minecraft']),
+    subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     print('Enabling Minecraft to start upon rebooting the server. \n'),
-    subprocess.run(['sudo', 'systemctl', 'enable', 'minecraft']),
+    # subprocess.run(['sudo', 'systemctl', 'enable', 'minecraft']),
+    subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
 ]
 
 run_commands_as_user(USERNAME, first_commands)
