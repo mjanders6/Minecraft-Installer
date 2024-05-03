@@ -1,3 +1,7 @@
+# Developer: Mr. Anderson777
+# Date: May 2024
+# 
+# Purpose: To automate building a Minecraft Server on an Ubuntu server. 
 # 
 # 
 # Trouble shooting notes:
@@ -5,8 +9,7 @@
 # - need to install python3-pip
 # - need to install inquirer as sudo
 # 
-# from curses.ascii import US
-# from re import sub
+
 import inquirer
 from inquirer.themes import GreenPassion
 import subprocess

@@ -33,7 +33,7 @@ I initially crated bash scritps to automate the process. minecraft-install.sh is
 4. Accessing the console
 	- `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t`
 
-# Running the python script
+# Running the Python Script
 1. Run the script with 
 	- `sudo python3 mc-installer.py`
 2. Enter the password for mcrcon when prompted
