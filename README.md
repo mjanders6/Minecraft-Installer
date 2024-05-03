@@ -43,5 +43,6 @@ I initially crated bash scritps to automate the process. minecraft-install.sh is
 # Removing Minecraft
 Note: This script will remove the minecraft user and its directory, remove the Minecraft-Installer directory, and re-clone the Minecraft-Installer repository.
 
-1. Set the refresh.sh to an executable
-2. Run `./refresh.sh`
+1. Copy and paste `refresh.sh` outside of the Minecraft-Installer directory
+2. Set the `refresh.sh` to an executable
+3. Run `./refresh.sh`
