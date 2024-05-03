@@ -39,3 +39,9 @@ I initially crated bash scritps to automate the process. minecraft-install.sh is
 2. Enter the password for mcrcon when prompted
 3. When installation is complete, run the following to verify that everything worked:
 	- `sudo systemctl status minecraft`
+
+# Removing Minecraft
+Note: This script will remove the minecraft user and its directory, remove the Minecraft-Installer directory, and re-clone the Minecraft-Installer repository.
+
+1. Set the refresh.sh to an executable
+2. Run `./refresh.sh`
