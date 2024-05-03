@@ -89,7 +89,7 @@ os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
 subprocess.run(['sudo', 'chown', '-R', f'{USERNAME}:{USERNAME}', MC_PATH], check=True)
 
 first_commands = [
-    print('Downloading Minecraft server from the Minecraft website: \n'),
+    print('\n Downloading Minecraft server from the Minecraft website: \n'),
     subprocess.Popen('wget https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar -P /opt/minecraft/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     os.chdir('/opt/minecraft/server'),
     print('Initializing Minecraft. Going to fail since the eula.txt is set to false. Be patient, this will take some time. Dont stop the process. \n'),
@@ -116,7 +116,7 @@ first_commands = [
     subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     print('Enabling Minecraft to start upon rebooting the server. \n'),
     subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
-    print('Installation complete. Give it a minute to run through its processes and run: \n '' sydo systemctl status minecraft'''),
+    print('Installation complete. Give it a minute to run through its processes and run: \n '' sydo systemctl status minecraft'' \n'),
 ]
 
 run_commands_as_user(USERNAME, first_commands)
