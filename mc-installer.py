@@ -4,7 +4,6 @@
 # - need to run as sudo 
 # - need to install python3-pip
 # - need to install inquirer as sudo
-# if you just want to call the shell scripts 
 # 
 from curses.ascii import US
 from re import sub
@@ -117,14 +116,7 @@ first_commands = [
     subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
     print('Enabling Minecraft to start upon rebooting the server. \n'),
     subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+    print('Installation complete. Give it a minute to run through its processes and run: \n '' sydo systemctl status minecraft'''),
 ]
 
 run_commands_as_user(USERNAME, first_commands)
-
-
-# chown /opt/minecraft to minecraft user 
-
-# choice = inquirer.list_input("Public or private?",
-                              # choices=['public', 'private'])
-# correct = inquirer.confirm("This will delete all your current labels and "
-                        # "create a new ones. Continue?", default=False)
