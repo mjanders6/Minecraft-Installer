@@ -50,7 +50,7 @@ class MC_Installer:
     @staticmethod
     def run_updates():
         proc = subprocess.Popen('sudo apt update', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-        print("Running updates and insstalling necessary packages.")
+        print("Running updates.")
         proc.wait()
         print("")
 
@@ -58,13 +58,14 @@ class MC_Installer:
     @staticmethod
     def run_upgrades():
         proc = subprocess.Popen('sudo apt upgrade', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
-        print("Running updates and insstalling necessary packages.")
+        print("Running upgrades. This might take some time if its been a while since your last upgrades.")
         proc.wait()
         print("")
 
     # install dependancies
     @staticmethod
     def inst_dependancies(git, build_ess, openjdk):
+        print('Installing {git}, {build_ess}, and {openjdk}')
         install_dependancies = subprocess.Popen(f'sudo apt install {git} {build_ess} {openjdk}', shell=True, stdin=None)
         install_dependancies.wait()
         print("")
