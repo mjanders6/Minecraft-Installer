@@ -47,7 +47,7 @@ def run_options(input):
             print('Run Full')
             full_qs = inquirer.prompt(full_resp)
             MC_SETUP.run_updates()
-            MC_SETUP.inst_dependancies()
+            MC_SETUP.run_upgrades()
             # Set password
 
             
