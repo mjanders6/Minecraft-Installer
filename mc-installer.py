@@ -26,16 +26,6 @@ MC_SETUP = MC_Installer()
 GIT = 'git'
 BUILD_Essential = 'build-essential'
 OPENJDK = 'openjdk-21-jre-headless'
-USERNAME = 'minecraft'
-
-RCON_PORT = '25575'
-RCON_ENABLE = 'true'
-EULA = 'true'
-
-# minecraft path
-MC_PATH = '/opt/minecraft'
-EULA_PATH = f'{MC_PATH}/server/eula.txt'
-SERVER_PROPS_PATH = f'{MC_PATH}/server/server.properties'
 
 # Paths for service file
 src_pth = r"./minecraft.service"
@@ -44,17 +34,14 @@ dest_path=r"/etc/systemd/system/minecraft.service"
 def run_options(input):
     match input:
         case 'Full':
-            print('Run Full')
+            print('Run Full installation')
             full_qs = inquirer.prompt(full_resp)
             MC_SETUP.run_updates()
             MC_SETUP.run_upgrades()
-            # Set password
-
-            
+            MC_SETUP.inst_dependancies(GIT, BUILD_Essential, OPENJDK)
             # Copy minecraft.service to the /etc/systemd/system location
-
             # Change password in the service file 
-
+            MC_SETUP.mc_service(src_pth, dest_path, full_qs['password'])
             # Create minecraft directories
 
             # Run installation

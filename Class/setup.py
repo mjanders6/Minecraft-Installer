@@ -74,7 +74,6 @@ class MC_Installer:
     def set_passwd():
         inquirer.password(message='Please enter your password for mcron: ')
 
-
     # copy minecraft service to system locations
     @staticmethod
     def mc_service(src_pth, dest_path, password):
