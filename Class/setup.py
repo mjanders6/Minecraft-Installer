@@ -92,7 +92,7 @@ class MC_Installer:
         subprocess.run(['sudo', 'chown', '-R', f'{username}:{username}', f'/opt/{username}'], check=True)
 
     @staticmethod
-    def mc_install(username, jar_file, password, rcon_port):
+    def mc_install(username, jar_file, password):
         first_commands = [
             print('\n Downloading Minecraft server from the Minecraft website: \n'),
             subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
