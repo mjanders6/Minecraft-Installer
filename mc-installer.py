@@ -50,7 +50,7 @@ def run_options(input):
         case 'Update':
             print('Update Jar file')
             update_qs = inquirer.prompt(mc_update_pt)
-            MC_SETUP.mc_update(update_qs['username'], update_qs['jar_file'])
+            MC_SETUP.mc_update(update_qs['username'], update_qs['mc_jar'])
         case 'Uninstall':
             print('Remove everything')
             uname = inquirer.text('Enter the name used to install minecraft: The default is `minecraft`. \nIf you can remember the name may be found in the /opt directory.', default='minecraft')
