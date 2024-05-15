@@ -128,6 +128,7 @@ class MC_Installer:
 
     @staticmethod
     def mc_uninstall(username):
+        os.chdir('cd ~')
         subprocess.Popen('sudo systemctl stop minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
         subprocess.Popen(f'pid=`pgrep -u {username}`', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
         subprocess.Popen('sudo kill -9 $pid', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
