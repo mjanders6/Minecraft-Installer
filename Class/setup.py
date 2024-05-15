@@ -152,8 +152,8 @@ class MC_Installer:
             print('Getting new Minecraft server'),
             subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # re-run java
-            print('Running the Minecraft server with Java'),
-            subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            #print('Running the Minecraft server with Java'),
+            #subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Reload damon
             print('Reloading daemon'),
             subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
