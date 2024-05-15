@@ -146,16 +146,22 @@ class MC_Installer:
             print('Stopping the Minecraft server'),
             subprocess.Popen(f'sudo systemctl stop {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Remove server.jar
+            print('Removing old Minecraft server'),
             subprocess.Popen('sudo rm server.jar', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Add new minecraft jar file
+            print('Getting new Minecraft server'),
             subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # re-run java
+            print('Running the Minecraft server with Java'),
             subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Reload damon
+            print('Reloading daemon'),
             subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Enable service
+            print('Enabling Minecraft server service'),
             subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Start service
+            print('Starting Minecraft server'),
             subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
         ]
         MC_Installer.run_commands_as_user(username, update_commands)
