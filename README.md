@@ -9,14 +9,15 @@ I initially crated bash scripts to automate the process. minecraft-install.sh is
 - https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar
 
 
-# Dependencies to be Installed during installation 
+# Dependencies
+## To be Installed during installation 
 - git
 - build-essentials
 - openjdk-21(or latest version)
 - mcrcon repository: `https://github.com/Tiiffi/mcrcon.git`
 - Optional: UFW Firewall to set firewall rules
 
-# Dependencies required to run the script
+## Required prior to running the script 
 - Ensure `sed` is installed
 - Inquirer and subprocess for the python script
 
