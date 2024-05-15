@@ -144,7 +144,7 @@ class MC_Installer:
             os.chdir(f'/opt/{username}/server'),
             # Stop minecraft
             print('Stopping the Minecraft server'),
-            subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            subprocess.Popen(f'sudo systemctl stop {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Remove server.jar
             subprocess.Popen('sudo rm server.jar', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Add new minecraft jar file
