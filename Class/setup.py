@@ -137,15 +137,26 @@ class MC_Installer:
         subprocess.Popen('git clone https://github.com/mjanders6/Minecraft-Installer.git', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
         subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
 
-        
-
-        
-
-        
-
-        
-
-        #chmod +x minecraft-install.sh
-
-        
-
+    @staticmethod
+    def mc_update(username, jar_file):
+        update_commands = [
+            print(f'Change to /opt/{username} directory'),
+            os.chdir(f'/opt/{username}/server'),
+            # Stop minecraft
+            print('Stopping the Minecraft server'),
+            subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            # Remove server.jar
+            subprocess.Popen('sudo rm server.jar', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            # Add new minecraft jar file
+            subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            # re-run java
+            subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            # Reload damon
+            subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            # Enable service
+            subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            # Start service
+            subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
+        ]
+        MC_Installer.run_commands_as_user(username, update_commands)
+    

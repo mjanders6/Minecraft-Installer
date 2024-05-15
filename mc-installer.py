@@ -49,6 +49,8 @@ def run_options(input):
             print(full_qs)
         case 'Update':
             print('Update Jar file')
+            update_qs = inquirer.prompt(mc_update_pt)
+            MC_SETUP.mc_update(update_qs['username'], update_qs['jar_file'])
         case 'Uninstall':
             print('Remove everything')
             uname = inquirer.text('Enter the name used to install minecraft: The default is `minecraft`. \nIf you can remember the name may be found in the /opt directory.', default='minecraft')
@@ -66,6 +68,13 @@ full_resp = [
     inquirer.Text('username', 'Username. Change default name if you like. ', default='minecraft'),
     # Set password
     inquirer.Password('password', message='Please enter your password for mcron'),
+    # Copy and paste link to minecraft jar file
+    inquirer.Text('mc_jar', 'Copy and past the link to the most current jar file '),
+]
+
+mc_update_pt = [
+    # Create username
+    inquirer.Text('username', 'Enter the username that was used during installation. If the default was used, keep this default. ', default='minecraft'),
     # Copy and paste link to minecraft jar file
     inquirer.Text('mc_jar', 'Copy and past the link to the most current jar file '),
 ]
