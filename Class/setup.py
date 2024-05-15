@@ -145,6 +145,9 @@ class MC_Installer:
             # Stop minecraft
             print('Stopping the Minecraft server'),
             subprocess.Popen(f'sudo systemctl stop {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            # Checking service
+            print('Check if Minecraft server stopped'),
+            subprocess.Popen(f'sudo systemctl status {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),            
             # Remove server.jar
             print('Removing old Minecraft server'),
             subprocess.Popen('sudo rm server.jar', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
