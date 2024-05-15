@@ -51,6 +51,8 @@ def run_options(input):
             print('Update Jar file')
         case 'Uninstall':
             print('Remove everything')
+            uname = inquirer.text('Enter the name used to install minecraft: The default is `minecraft`. \nIf you can remember the name may be found in the /opt directory.', default='minecraft')
+            MC_SETUP.mc_uninstall(uname)
 
 
 # Set intall options
