@@ -52,9 +52,3 @@ I initially crated bash scripts to automate the process. minecraft-install.sh is
 4. Accessing the console
 	- `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t`
 
-# Removing Minecraft
-Note: This script will remove the minecraft user and its directory, remove the Minecraft-Installer directory, and re-clone the Minecraft-Installer repository.
-
-1. Copy and paste `refresh.sh` outside of the Minecraft-Installer directory
-2. Set the `refresh.sh` to an executable
-3. Run `./refresh.sh`
