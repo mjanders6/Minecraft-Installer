@@ -153,7 +153,7 @@ class MC_Installer:
             subprocess.Popen('sudo rm server.jar', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Print removed jar file -- debug
             print('Show removed jar file\n'),
-            subprocess.Popen('ls -la', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
+            subprocess.Popen('ls -la', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash"),
             # Add new minecraft jar file
             print('Getting new Minecraft server\n'),
             subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
