@@ -97,11 +97,11 @@ class MC_Installer:
             print('\n Downloading Minecraft server from the Minecraft website: \n'),
             subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             os.chdir(f'/opt/{username}/server'),
-            print('Initializing Minecraft. Going to fail since the eula.txt is set to false. Be patient, this will take some time. Dont stop the process. \n'),
+            print('Initializing Minecraft. Going to fail since the eula.txt is set to false. Be patient, this will take some time. ** Dont stop the process. ** \n'),
             subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Setting the eula.txt to true. \n'),
             subprocess.run(['sed', '-i', 's/eula=.*/eula=true/', f'/opt/{username}/server/eula.txt'], check=True),
-            print('Changing the rcon port. \n'),
+            print('Changing the rcon port. The default is 25575 and can be changed after installation. \n'),
             subprocess.run(['sed', '-i', 's/rcon.port=.*/rcon.port=25575/', f'/opt/{username}/server/server.properties'], check=True),
             print('Enable rcon. \n'),
             subprocess.run(['sed', '-i', 's/enable-rcon=.*/enable-rcon=true/', f'/opt/{username}/server/server.properties'], check=True),
@@ -121,7 +121,30 @@ class MC_Installer:
             subprocess.Popen(f'sudo systemctl start {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Enabling Minecraft to start upon rebooting the server. \n'),
             subprocess.Popen(f'sudo systemctl enable {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
-            print('Installation complete. Give it a minute to run through its processes and run: \n '' sydo systemctl status minecraft'' \n'),
+            print('Installation complete. Give it a minute to run through its processes and run: \n '' sudo systemctl status minecraft'' \n'),
             ]
 
         MC_Installer.run_commands_as_user(username, first_commands)
+
+    @staticmethod
+    def mc_uninstall(username):
+        subprocess.Popen('sudo systemctl stop minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
+        subprocess.Popen(f'pid=`pgrep -u {username}`', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
+        subprocess.Popen('sudo kill -9 $pid', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
+        subprocess.Popen(f'sudo userdel {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
+        subprocess.Popen(f'sudo rm -rf Minecraft-Installer /opt/{username} /etc/systemd/system/minecraft.service', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
+        subprocess.Popen('git clone https://github.com/mjanders6/Minecraft-Installer.git', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
+        subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
+
+        
+
+        
+
+        
+
+        
+
+        #chmod +x minecraft-install.sh
+
+        
+
