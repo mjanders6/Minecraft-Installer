@@ -141,34 +141,34 @@ class MC_Installer:
         update_commands = [
             # Stop minecraft
             print('Stopping the Minecraft server\n'),
-            subprocess.Popen(f'sudo systemctl stop {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash"),
+            subprocess.Popen(f'sudo systemctl stop {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Checking service
             print('Check if Minecraft server stopped\n'),
-            subprocess.Popen(f'sudo systemctl status {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash"),            
+            subprocess.Popen(f'sudo systemctl status {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),            
             # Change to the server directory
             # print(f'Change to /opt/{username} directory\n'),
             # os.chdir(f'/opt/{username}/server'),
             # Remove server.jar
             print('Removing old Minecraft server\n'),
-            subprocess.Popen(f'sudo rm /opt/{username}/server/server.jar', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash"),
+            subprocess.Popen(f'sudo rm /opt/{username}/server/server.jar', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Print removed jar file -- debug
             print('Show removed jar file\n'),
-            subprocess.Popen('ls -la', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash"),
+            subprocess.Popen('ls -la', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Add new minecraft jar file
             print('Getting new Minecraft server\n'),
-            subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash"),
+            subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # re-run java
-            #print('Running the Minecraft server with Java'),
-            #subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            print('Running the Minecraft server with Java'),
+            subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Reload damon
             print('Reloading daemon\n'),
-            subprocess.Popen('sudo systemctl daemon-reload\n', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash"),
+            subprocess.Popen('sudo systemctl daemon-reload\n', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Enable service
             print('Enabling Minecraft server service\n'),
-            subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash"),
+            subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             # Start service
             print('Starting Minecraft server\n'),
-            subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash")
+            subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait()
         ]
         MC_Installer.run_commands_as_user(username, update_commands)
     
