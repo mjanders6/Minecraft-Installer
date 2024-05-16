@@ -52,6 +52,7 @@ inst_options = inquirer.list_input(
     choices=["Full", "Update", "Uninstall"],
 )
 
+# Full install prompt variables
 full_resp = [
     # Create username
     inquirer.Text('username', 'Username. Change default name if you like. ', default='minecraft'),
@@ -61,6 +62,7 @@ full_resp = [
     inquirer.Text('mc_jar', 'Copy and past the link to the most current jar file '),
 ]
 
+# Update prompt vriables
 mc_update_pt = [
     # Create username
     inquirer.Text('username', 'Enter the username that was used during installation. If the default was used, keep this default. ', default='minecraft'),

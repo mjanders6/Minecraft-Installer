@@ -1,6 +1,11 @@
-'''
+# Developer: Mr. Anderson777
+# Date: May 2024
+# 
+# Purpose: Class to support mc-installer.py 
+# 
+# 
+# 
 
-'''
 import inquirer
 import subprocess
 from subprocess import STDOUT
@@ -82,47 +87,47 @@ class MC_Installer:
     
     # create directories 
     @staticmethod
-    def set_dirs(username):
-        subprocess.run(["sudo", "useradd", "-r", "-m", "-U", "-d", f'/opt/{username}', "-s", "/bin/bash", username])
-        os.makedirs(os.path.expanduser(f'/opt/{username}/backups'), exist_ok=True)
-        os.makedirs(os.path.expanduser(f'/opt/{username}/server'), exist_ok=True)
-        os.makedirs(os.path.expanduser(f'/opt/{username}/tools'), exist_ok=True)
-        subprocess.run(['sudo', 'chown', '-R', f'{username}:{username}', f'/opt/{username}'], check=True)
+    def set_dirs():
+        subprocess.run(["sudo", "useradd", "-r", "-m", "-U", "-d", '/opt/minecraft', "-s", "/bin/bash", 'minecraft'])
+        os.makedirs(os.path.expanduser('/opt/minecraft/backups'), exist_ok=True)
+        os.makedirs(os.path.expanduser('/opt/minecraft/server'), exist_ok=True)
+        os.makedirs(os.path.expanduser('/opt/minecraft/tools'), exist_ok=True)
+        subprocess.run(['sudo', 'chown', '-R', 'minecraft:minecraft', '/opt/minecraft'], check=True)
 
     @staticmethod
-    def mc_install(username, jar_file, password):
+    def mc_install(jar_file, password):
         first_commands = [
             print('\n Downloading Minecraft server from the Minecraft website: \n'),
-            subprocess.Popen(f'wget {jar_file} -P /opt/{username}/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
-            os.chdir(f'/opt/{username}/server'),
+            subprocess.Popen(f'wget {jar_file} -P /opt/minecraft/server', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            os.chdir('/opt/minecraft/server'),
             print('Initializing Minecraft. Going to fail since the eula.txt is set to false. Be patient, this will take some time. ** Dont stop the process. ** \n'),
             subprocess.Popen('java -Xmx1024M -Xms1024M -jar server.jar nogui', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Setting the eula.txt to true. \n'),
-            subprocess.run(['sed', '-i', 's/eula=.*/eula=true/', f'/opt/{username}/server/eula.txt'], check=True),
+            subprocess.run(['sed', '-i', 's/eula=.*/eula=true/', '/opt/minecraft/server/eula.txt'], check=True),
             print('Changing the rcon port. The default is 25575 and can be changed after installation. \n'),
-            subprocess.run(['sed', '-i', 's/rcon.port=.*/rcon.port=25575/', f'/opt/{username}/server/server.properties'], check=True),
+            subprocess.run(['sed', '-i', 's/rcon.port=.*/rcon.port=25575/', '/opt/minecraft/server/server.properties'], check=True),
             print('Enable rcon. \n'),
-            subprocess.run(['sed', '-i', 's/enable-rcon=.*/enable-rcon=true/', f'/opt/{username}/server/server.properties'], check=True),
+            subprocess.run(['sed', '-i', 's/enable-rcon=.*/enable-rcon=true/', '/opt/minecraft/server/server.properties'], check=True),
             print('Adding the password to rcon. \n'),
-            subprocess.run(['sed', '-i', f's/rcon.password=.*/rcon.password={password}/', f'/opt/{username}/server/server.properties'], check=True),
+            subprocess.run(['sed', '-i', f's/rcon.password=.*/rcon.password={password}/', '/opt/minecraft/server/server.properties'], check=True),
             print('Downloading mcrcon from the git repository. \n'),
-            subprocess.Popen(f'git clone https://github.com/Tiiffi/mcrcon.git /opt/{username}/tools/mcrcon', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            subprocess.Popen('git clone https://github.com/Tiiffi/mcrcon.git /opt/minecraft/tools/mcrcon', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Changing directory to mcrcon. \n'),
-            os.chdir(f'/opt/{username}/tools/mcrcon'),
+            os.chdir('/opt/minecraft/tools/mcrcon'),
             print('Initializing mcrcon. \n'),
             subprocess.Popen('gcc -std=gnu11 -pedantic -Wall -Wextra -O2 -s -o mcrcon mcrcon.c', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Setting the minecraft directory. \n'),
-            subprocess.Popen(f'sudo chown -R {username}:{username} /opt/{username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            subprocess.Popen('sudo chown -R minecraft:minecraft /opt/minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Reloading deamon. \n'),
             subprocess.Popen('sudo systemctl daemon-reload', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Starting Minecraft. \n'),
-            subprocess.Popen(f'sudo systemctl start {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            subprocess.Popen('sudo systemctl start minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Enabling Minecraft to start upon rebooting the server. \n'),
-            subprocess.Popen(f'sudo systemctl enable {username}', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
+            subprocess.Popen('sudo systemctl enable minecraft', shell=True, stdin=None, stdout=open(os.devnull,"wb"), stderr=STDOUT, executable="/bin/bash").wait(),
             print('Installation complete. Give it a minute to run through its processes and run: \n '' sudo systemctl status minecraft'' \n'),
             ]
 
-        MC_Installer.run_commands_as_user(username, first_commands)
+        MC_Installer.run_commands_as_user('minecraft', first_commands)
 
     @staticmethod
     def mc_uninstall(username):
