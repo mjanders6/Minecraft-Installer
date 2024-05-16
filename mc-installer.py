@@ -34,7 +34,8 @@ def run_options(input):
             # Create minecraft directories
             MC_SETUP.set_dirs(full_qs['username'])
             # Run installation
-            MC_SETUP.mc_install(full_qs['username'], full_qs['mc_jar'], full_qs['password'])
+            #MC_SETUP.mc_install(full_qs['username'], full_qs['mc_jar'], full_qs['password'])
+            MC_SETUP.mc_install(full_qs['mc_jar'], full_qs['password'])
             print(full_qs)
         case 'Update':
             print('Update Jar file')
