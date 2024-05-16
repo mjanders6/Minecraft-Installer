@@ -1,9 +1,7 @@
 '''
 
 '''
-import statistics
 import inquirer
-from inquirer.themes import GreenPassion
 import subprocess
 from subprocess import STDOUT
 import os

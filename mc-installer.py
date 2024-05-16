@@ -11,13 +11,6 @@
 # 
 
 import inquirer
-from inquirer.themes import GreenPassion
-from inquirer import errors, Password
-import subprocess
-from subprocess import STDOUT
-import os
-import shutil
-import asyncio
 from Class.setup import MC_Installer
 
 MC_SETUP = MC_Installer()
