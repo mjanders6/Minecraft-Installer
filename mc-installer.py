@@ -32,7 +32,8 @@ def run_options(input):
             # Change password in the service file 
             MC_SETUP.mc_service(src_pth, dest_path, full_qs['password'])
             # Create minecraft directories
-            MC_SETUP.set_dirs(full_qs['username'])
+            #MC_SETUP.set_dirs(full_qs['username'])
+            MC_SETUP.set_dirs()
             # Run installation
             #MC_SETUP.mc_install(full_qs['username'], full_qs['mc_jar'], full_qs['password'])
             MC_SETUP.mc_install(full_qs['mc_jar'], full_qs['password'])
