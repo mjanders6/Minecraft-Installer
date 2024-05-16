@@ -1,13 +1,9 @@
 # Developer: Mr. Anderson777
 # Date: May 2024
 # 
-# Purpose: To automate building a Minecraft Server on an Ubuntu server. 
+# Purpose: To automate building, updating, and removing a Minecraft Server on an Ubuntu server. 
 # 
 # 
-# Trouble shooting notes:
-# - need to run as sudo 
-# - need to install python3-pip
-# - need to install inquirer as sudo
 # 
 
 import inquirer
