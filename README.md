@@ -5,9 +5,9 @@ I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxiz
 
 I initially crated bash scripts to automate the process. minecraft-install.sh is the script that can also be run to automate the process as well. 
 
-[Link to Minecraft Jar file](https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar)
-- https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar
-
+# Minecraft Jar files: 
+- [1.20.5](https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar)
+- [1.20.6](https://piston-data.mojang.com/v1/objects/145ff0858209bcfc164859ba735d4199aafa1eea/server.jar)
 
 # Dependencies
 ## To be Installed during installation 
