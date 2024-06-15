@@ -51,7 +51,7 @@ def run_options(input):
 # Set intall options
 inst_options = inquirer.list_input(
     message="Choose which intallation option you woudl like:",
-    choices=["Full", "Update", "Uninstall"],
+    choices=["Full", "Update", "Uninstall", "Backup", "Console Access"],
 )
 
 # Full install prompt variables
