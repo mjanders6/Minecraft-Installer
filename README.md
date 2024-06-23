@@ -3,7 +3,7 @@ Light python script to create a Java Edition Minecraft Server
 
 I have been using [How to Make Minecraft Server on Ubuntu 20.04](https://linuxize.com/post/how-to-make-minecraft-server-on-ubuntu-20-04/#configuring-backups) to make a solid Minecraft server. This also works for Ubuntu 22.04. I am essentially breaking up this instructions into a python script to automate the process. I will then test it out in an Ubuntu 22.04 VM to ensure it works properly. 
 
-I initially crated bash scripts to automate the process. minecraft-install.sh is the script that can also be run to automate the process as well. 
+I initially crated bash scripts to automate the process. This can be found in [Minecraft-Installer---Bash-Scripts](https://github.com/mjanders6/Minecraft-Installer---Bash-Scripts.git). 
 
 # Minecraft Jar files: 
 - [1.20.5](https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar)
