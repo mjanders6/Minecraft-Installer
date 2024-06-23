@@ -36,6 +36,6 @@ I initially crated bash scripts to automate the process. minecraft-install.sh is
 	- Select `Uninstall`
 	- Enter the name of the minecraft server. If the default was left during installation, leave the default name during this process.
 
-4. Accessing the console
-	- `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t`
+# Accessing the console
+1. `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t`
 
