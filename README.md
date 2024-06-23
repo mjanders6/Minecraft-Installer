@@ -8,6 +8,7 @@ I initially crated bash scripts to automate the process. minecraft-install.sh is
 # Minecraft Jar files: 
 - [1.20.5](https://piston-data.mojang.com/v1/objects/79493072f65e17243fd36a699c9a96b4381feb91/server.jar)
 - [1.20.6](https://piston-data.mojang.com/v1/objects/145ff0858209bcfc164859ba735d4199aafa1eea/server.jar)
+- [1.21.0](https://piston-data.mojang.com/v1/objects/450698d1863ab5180c25d7c804ef0fe6369dd1ba/server.jar)
 
 # Dependencies
 ## To be Installed during installation 
