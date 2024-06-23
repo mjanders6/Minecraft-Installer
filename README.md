@@ -36,20 +36,6 @@ I initially crated bash scripts to automate the process. minecraft-install.sh is
 	- Select `Uninstall`
 	- Enter the name of the minecraft server. If the default was left during installation, leave the default name during this process.
 
-# Running the Shell Code
-1. Set `minecraft-install.sh` to an executable. It will set all necessary files as executable: `chmod +x File-Name`
-2. Run `./minecraft-install.sh`
-3. The `minecraft-install.sh` will perform the following:
-	- Edit the eula.txt file: `eula=true`
-	- Update the `server.properties`
-		- `rcon.port=25575`
-		- Prompt you to set the `rcon.password`
-		- `enable-rcon=true`
-	- Add the minecraft.service file to the directory: `/etc/systemd/system`
-	- Reload the daemon: `daemon-reload`
-	- Start the service: `sudo systemctl start minecraft`
-	- Enable service to start after rebooting: `sudo systemctl enable minecraft`
-	- Create script to backup the server file
 4. Accessing the console
 	- `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t`
 
