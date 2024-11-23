@@ -11,6 +11,7 @@ Get the server link at: [Java Edition server](https://www.minecraft.net/en-us/do
 - [1.20.6](https://piston-data.mojang.com/v1/objects/145ff0858209bcfc164859ba735d4199aafa1eea/server.jar)
 - [1.21.0](https://piston-data.mojang.com/v1/objects/450698d1863ab5180c25d7c804ef0fe6369dd1ba/server.jar)
 - [1.21.1](https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar)
+- [1.21.3](https://piston-data.mojang.com/v1/objects/45810d238246d90e811d896f87b14695b7fb6839/server.jar)
 
 # Dependencies
 ## To be Installed during installation 
