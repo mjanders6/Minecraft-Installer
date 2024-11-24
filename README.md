@@ -40,5 +40,5 @@ Get the server link at: [Java Edition server](https://www.minecraft.net/en-us/do
 	- Enter the name of the minecraft server. If the default was left during installation, leave the default name during this process.
 
 # Accessing the console
-1. `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t`
+1. `/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p 'strong-password' -t`
 
